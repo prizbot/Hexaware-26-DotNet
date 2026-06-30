@@ -46,19 +46,3 @@ board, every cell, and every status badge is created at runtime by
 6. **Clock & status loops**: two `setInterval` timers — one repaints the clock
    text every second, the other advances one random flight's status every 4
    seconds and re-derives the summary counts.
-
-## Challenges
-
-- Re-triggering a CSS animation on the *same* element when its class doesn't
-  technically change (status going `ON TIME → BOARDING` works fine since the
-  class changes, but to guarantee the flip restarts every time I force a
-  reflow with `void badge.offsetWidth` before re-adding the animation class).
-- Deciding when to do a full re-render vs. a surgical DOM update — settled on
-  full re-render for structural changes (Reset, row-cap eviction) and
-  single-node updates for anything that doesn't change row count (status ticks).
-- Keeping `localStorage` writes resilient (wrapped in try/catch) since private
-  browsing or storage quota issues shouldn't break the app.
-
-## Run it
-
-Just open `index.html` in a browser — no build step or server required.
